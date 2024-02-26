@@ -3,32 +3,32 @@
 /**
  * is_integer - function checks for an integer.
  *
- * @s: pointer to the integer to check.
+ * @arg: pointer to the integer to check.
  *
- * Return: 1 if it is an integer, else 0.
+ * Return: true if it is an integer, else false.
 */
-int is_integer(char *s)
+bool is_integer(char *arg)
 {
-	int i;
+	int i = 0;
 
-	if (s == NULL)
+	if (arg == NULL)
 	{
-		return (0);
+		return (false);
 	}
 
-	if (s[0] == '-')
+	if (arg[0] == '-')
 	{
 		i = 1;
 	}
 
-	for (; s[i] != '\0'; i++)
+	for (; arg[i] != '\0'; i++)
 	{
-		if (!isdigit(s[i]))
+		if (!isdigit(arg[i]))
 		{
-			return (0);
+			return (false);
 		}
 	}
-	return (1);
+	return (true);
 }
 
 /**

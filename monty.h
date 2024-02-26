@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
+#include <stdbool.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -43,7 +44,7 @@ void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 
 /* 0-functions.c */
-int is_integer(char *s);
+bool is_integer(char *arg);
 void handle_error(int line_number, char *message, char *opcode);
 FILE *open_file(char *filename);
 
