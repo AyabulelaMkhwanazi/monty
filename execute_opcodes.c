@@ -33,8 +33,7 @@ unsigned int line_number)
 			{
 				if (arg == NULL || !is_integer(arg))
 				{
-					fprintf(stderr, "L%d: usage: push integer\n", line_number);
-					exit(EXIT_FAILURE);
+					handle_error(line_number, "usage: push integer");
 				}
 				n = atoi(arg);
 				opcodes[i].f(stack, n);
@@ -48,6 +47,5 @@ unsigned int line_number)
 		i++;
 	}
 	/* if no matching opcode was found, print an error */
-	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
-	exit(EXIT_FAILURE);
+	handle_error(line_number, "unknown instruction");
 }

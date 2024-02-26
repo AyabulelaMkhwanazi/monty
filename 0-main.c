@@ -21,17 +21,11 @@ int main(int argc, char **argv)
 	/* check if the correct number of arguments was passed. */
 	if (argc != 2)
 	{
-		fprintf(stderr, "USAGE: monty file\n");
-		return (EXIT_FAILURE);
+		handle_error(0, "USAGE: monty file");
 	}
 
-	/* open the Monty bycode file */
-	file = fopen(argv[1], "r");
-	if (file == NULL)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		return (EXIT_FAILURE);
-	}
+	/* open the Monty bytcode file */
+	file = open_file(argv[1]);
 
 	/* Parse the file and execute the opcodes */
 	while ((read = getline(&line, &len, file)) != -1)

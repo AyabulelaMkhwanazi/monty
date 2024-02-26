@@ -44,6 +44,8 @@ void pall(stack_t **stack, unsigned int line_number);
 
 /* 0-functions.c */
 int is_integer(char *s);
+void handle_error(int line_number, char *message);
+FILE *open_file(char *filename);
 
 /* execute_opcodes.c */
 void execute_opcode(char *opcode, char *arg, stack_t **stack,
