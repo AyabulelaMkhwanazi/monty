@@ -36,8 +36,8 @@ int main(int argc, char **argv)
 	/* Parse the file and execute the opcodes */
 	while ((read = getline(&line, &len, file)) != -1)
 	{
-		opcode = strtok(line, " \t\n");
 		line_number++;
+		opcode = strtok(line, " \t\n");
 		if (opcode == NULL)
 		{
 			continue;
