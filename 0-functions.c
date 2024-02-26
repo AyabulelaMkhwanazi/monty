@@ -53,7 +53,7 @@ void handle_error(int line_number, char *message)
 	}
 	else
 	{
-		fprintf(stderr, "L%d: %s", line_number, message);
+		fprintf(stderr, "L%d: %s\n", line_number, message);
 	}
 	exit(EXIT_FAILURE);
 }
