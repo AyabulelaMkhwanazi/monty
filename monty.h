@@ -39,9 +39,10 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/* opcodes_functions.c */
+/* opcode_functions.c */
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
 
 /* 0-functions.c */
 bool is_integer(char *arg);
@@ -52,7 +53,7 @@ FILE *open_file(char *filename);
 void execute_opcode(char *opcode, char *arg, stack_t **stack,
 unsigned int line_number);
 
-/* free.c */
+/* memory.c */
 void free_stack(stack_t **stack);
 
 #endif
