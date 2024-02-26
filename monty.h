@@ -38,10 +38,18 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/* opcodes_functions.c */
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+
+/* 0-functions.c */
 int is_integer(char *s);
+
+/* execute_opcodes.c */
 void execute_opcode(char *opcode, char *arg, stack_t **stack,
 unsigned int line_number);
+
+/* free.c */
+void free_stack(stack_t **stack);
 
 #endif

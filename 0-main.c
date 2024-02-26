@@ -46,6 +46,7 @@ int main(int argc, char **argv)
 		execute_opcode(opcode, arg, &stack, line_number);
 	}
 	free(line);
+	free_stack(&stack);
 
 	/* close the file */
 	fclose(file);
