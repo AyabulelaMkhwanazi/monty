@@ -41,8 +41,8 @@ int main(int argc, char **argv)
 		{
 			continue;
 		}
-		line_number++;
 		arg = strtok(NULL, " \t\n");
+		line_number++;
 		execute_opcode(opcode, arg, &stack, line_number);
 	}
 	free(line);
