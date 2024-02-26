@@ -47,7 +47,14 @@ int is_integer(char *s)
 */
 void handle_error(int line_number, char *message)
 {
-	fprintf(stderr, "L%d: %s\n", line_number, message);
+	if (line_number == 0)
+	{
+		fprintf(stderr, "%s\n", message);
+	}
+	else
+	{
+		fprintf(stderr, "L%d: %s\n", line_number, message);
+	}
 	exit(EXIT_FAILURE);
 }
 
