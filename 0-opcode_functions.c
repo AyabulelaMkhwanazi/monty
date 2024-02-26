@@ -117,3 +117,34 @@ void pop(stack_t **stack, unsigned int line_number)
 		(*stack)->prev = NULL;
 	}
 }
+
+/**
+ * swap - Swaps the top two elements of the stack.
+ *
+ * @stack: pointer to pointer to the top of the stack.
+ * @line_number: The line number where the node is located.
+ *
+ * Description: This function is designed to implement the 'swap'
+ *			opcode in Monty bytecode file.
+ *			The 'swap' opcode swaps the top two elements of the
+ *			stack. If the stack contains less than two elements,
+ *			it prints an error message and exits with the status
+ *			EXIT_FAILURE.
+ *
+ * Return: void.
+*/
+void swap(stack_t **stack, unsigned int line_number)
+{
+	int tmp;
+
+	/* check if the stack contains less than 2 elements */
+	if (*stack == NULL || (*stack)->next == NULL)
+	{
+		handle_error(line_number, "can't swap, stack too short", NULL);
+	}
+
+	/* swaps the 2 elements of the stack */
+	tmp = (*stack)->n;
+	(*stack)->n = (*stack)->next->n;
+	(*stack)->next->n = tmp;
+}

@@ -4,6 +4,7 @@
  * allocate_memory - Allocates memory of a given size.
  *
  * @size: The size of the memory to allocate.
+ * @line_number: the line number.
  *
  * Description: This function allocates memory of a given
  *			size using malloc.
@@ -22,7 +23,7 @@ void *allocate_memory(size_t size, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	return ptr;
+	return (ptr);
 }
 
 /**

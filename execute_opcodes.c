@@ -23,6 +23,8 @@ unsigned int line_number)
 		{"pall", pall},
 		{"pint", pint},
 		{"pop", pop},
+		{"swap", swap},
+		{"add", add},
 		{NULL, NULL}
 	};
 	int n, i = 0;
