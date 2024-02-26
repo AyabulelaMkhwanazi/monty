@@ -32,7 +32,7 @@ unsigned int line_number)
 		{
 			if (strcmp(opcode, "push") == 0)
 			{
-				if (arg == NULL || !is_integer(arg))
+				if (!is_integer(arg))
 				{
 					snprintf(error_message, sizeof(error_message), "usage: push integer");
 					handle_error(line_number, error_message, NULL);
