@@ -37,12 +37,12 @@ int main(int argc, char **argv)
 	while ((read = getline(&line, &len, file)) != -1)
 	{
 		opcode = strtok(line, " \t\n");
+		line_number++;
 		if (opcode == NULL)
 		{
 			continue;
 		}
 		arg = strtok(NULL, " \t\n");
-		line_number++;
 		execute_opcode(opcode, arg, &stack, line_number);
 	}
 	free(line);
