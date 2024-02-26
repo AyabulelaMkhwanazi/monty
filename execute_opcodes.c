@@ -49,5 +49,6 @@ unsigned int line_number)
 		i++;
 	}
 	/* if no matching opcode was found, print an error */
-	handle_error(line_number, "unknown instruction", opcode);
+	sprintf(error_message, "L%d: unknown instruction %s", line_number, opcode);
+	handle_error(line_number, error_message, NULL);
 }
