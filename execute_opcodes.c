@@ -33,7 +33,7 @@ unsigned int line_number)
 			{
 				if (arg == NULL || !is_integer(arg))
 				{
-					handle_error(line_number, "usage: push integer", arg);
+					handle_error(line_number, "usage: push integer", NULL);
 				}
 				n = atoi(arg);
 				opcodes[i].f(stack, n);
