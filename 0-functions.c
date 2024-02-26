@@ -37,6 +37,7 @@ int is_integer(char *s)
  *
  * @line_number: the line number to where the error occured.
  * @message: the error message to be printed.
+ * @opcode: the opcode.
  *
  * Description: This function takes a line number and an
  *			error message as arguments. It prints the
@@ -45,15 +46,19 @@ int is_integer(char *s)
  *
  * Return: void.
 */
-void handle_error(int line_number, char *message)
+void handle_error(int line_number, char *message, char *opcode)
 {
 	if (line_number == 0)
 	{
-		fprintf(stderr, "%s\n", message);
+		fprintf(stderr, "%s", message);
+	}
+	else if (opcode == NULL)
+	{
+		fprintf(stderr, "L%d: %s", line_number, message);
 	}
 	else
 	{
-		fprintf(stderr, "L%d: %s\n", line_number, message);
+		fprintf(stderr, "L%d: %s %s", line_number, message, opcode);
 	}
 	exit(EXIT_FAILURE);
 }
@@ -77,7 +82,7 @@ FILE *open_file(char *filename)
 	if (file == NULL)
 	{
 		snprintf(error_message, sizeof(error_message), "Error: Can't open file %s\n", filename);
-		handle_error(0, error_message);
+		handle_error(0, error_message, NULL);
 	}
 	return file;
 }

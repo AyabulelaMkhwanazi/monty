@@ -16,7 +16,7 @@ void push(stack_t **stack, unsigned int line_number)
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
-		handle_error(line_number, "Error: malloc failed");
+		handle_error(line_number, "Error: malloc failed", NULL);
 	}
 	new->n = line_number;
 	new->prev = NULL;

@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 	/* check if the correct number of arguments was passed. */
 	if (argc != 2)
 	{
-		handle_error(0, "USAGE: monty file");
+		handle_error(0, "USAGE: monty file", NULL);
 	}
 
 	/* open the Monty bytcode file */
