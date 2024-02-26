@@ -82,7 +82,8 @@ FILE *open_file(char *filename)
 
 	if (file == NULL)
 	{
-		snprintf(error_message, sizeof(error_message), "Error: Can't open file %s", filename);
+		snprintf(error_message, sizeof(error_message),
+				"Error: Can't open file %s", filename);
 		handle_error(0, error_message, NULL);
 	}
 	return (file);
