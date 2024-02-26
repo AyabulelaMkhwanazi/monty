@@ -1,10 +1,16 @@
 #include "monty.h"
 
 /**
- * push - pushes an element to the stack
+ * push - Pushes an element to the stack.
  *
  * @stack: pointer to pointer to the top of the stack.
- * @line_number: value of the new element.
+ * @line_number: The value of the new element.
+ *
+ * Description: This function is designed to implement the
+ *			'push' opcode in a Monty bytecode file.
+ *			The 'push' opcode pushes an element to the stack.
+ *			If memory allocation fails, it prints an error
+ *			message and exits with the status EXIT_FAILURE.
  *
  * Return: void.
 */
@@ -13,11 +19,8 @@ void push(stack_t **stack, unsigned int line_number)
 	stack_t *new;
 
 	/* allocate memory for a new node */
-	new = malloc(sizeof(stack_t));
-	if (new == NULL)
-	{
-		handle_error(line_number, "Error: malloc failed", NULL);
-	}
+	new = allocate_memory(sizeof(stack_t), line_number);
+
 	new->n = line_number;
 	new->prev = NULL;
 	new->next = *stack;
@@ -29,10 +32,15 @@ void push(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * pall - prints all values on the stack starting from the top of the stack
+ * pall - Prints all values on the stack, starting from the top of the stack.
  *
  * @stack: pointer to pointer to the top of the stack.
- * @line_number: line number
+ * @line_number: The line number where the opcode is located.
+ *
+ * Description: This function is designed to implement the 'pall'
+ *			opcode in a Monty bytecode file.
+ *			The 'pall' opcode prints all values on the stack,
+ *			starting from the top of the stack.
  *
  * Return: void.
 */
@@ -74,4 +82,38 @@ void pint(stack_t **stack, unsigned int line_number)
 
 	/* print the value at the top of the stack */
 	printf("%d\n", (*stack)->n);
+}
+
+/**
+ * pop - Removes the top element of the stack.
+ *
+ * @stack: pointer to pointer to the top of the stack.
+ * @line_number: The line number where the opcode is located.
+ *
+ * Description: This function is designed to implement the
+ *			'pop' opcode in a Monty bytecode file.
+ *			The 'pop' opcode removes the top element of the
+ *			stack. If the stack is empty, it prints an error
+ *			message and exits with the status EXIT_FAILURE.
+ *
+ * Return: void.
+*/
+void pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp;
+
+	/* check if the stack is empty */
+	if (*stack == NULL)
+	{
+		handle_error(line_number, "can't pop an empty stack", NULL);
+	}
+
+	/* remove the top element of the stack */
+	tmp = (*stack)->next;
+	free(*stack);
+	*stack = tmp;
+	if (*stack != NULL)
+	{
+		(*stack)->prev = NULL;
+	}
 }

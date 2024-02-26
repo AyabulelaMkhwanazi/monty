@@ -1,6 +1,31 @@
 #include "monty.h"
 
 /**
+ * allocate_memory - Allocates memory of a given size.
+ *
+ * @size: The size of the memory to allocate.
+ *
+ * Description: This function allocates memory of a given
+ *			size using malloc.
+ *			If memory allocation fails, it prints an error
+ *			message and exits with the status EXIT_FAILURE.
+ *
+ * Return: A pointer to the allocated memory.
+*/
+void *allocate_memory(size_t size, unsigned int line_number)
+{
+	void *ptr = malloc(size);
+
+	if (ptr == NULL)
+	{
+		handle_error(line_number, "Error: malloc failed", NULL);
+		exit(EXIT_FAILURE);
+	}
+
+	return ptr;
+}
+
+/**
  * free_stack - function frees a stack.
  *
  * @stack: pointer to pointer to the top of the stack.
