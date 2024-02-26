@@ -24,6 +24,7 @@ unsigned int line_number)
 		{NULL, NULL}
 	};
 	int n, i = 0;
+	char error_message[256];
 
 	while (opcodes[i].opcode != NULL)
 	{
@@ -33,7 +34,8 @@ unsigned int line_number)
 			{
 				if (arg == NULL || !is_integer(arg))
 				{
-					handle_error(line_number, "usage: push integer", NULL);
+					snprintf(error_message, sizeof(error_message), "usage: push integer");
+					handle_error(line_number, error_message, NULL);
 				}
 				n = atoi(arg);
 				opcodes[i].f(stack, n);

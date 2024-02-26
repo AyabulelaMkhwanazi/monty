@@ -79,10 +79,11 @@ FILE *open_file(char *filename)
 {
 	char error_message[256];
 	FILE *file = fopen(filename, "r");
+
 	if (file == NULL)
 	{
 		snprintf(error_message, sizeof(error_message), "Error: Can't open file %s", filename);
 		handle_error(0, error_message, NULL);
 	}
-	return file;
+	return (file);
 }
