@@ -36,12 +36,12 @@ int main(int argc, char **argv)
 	/* Parse the file and execute the opcodes */
 	while ((read = getline(&line, &len, file)) != -1)
 	{
-		line_number++;
 		opcode = strtok(line, " \t\n");
 		if (opcode == NULL)
 		{
 			continue;
 		}
+		line_number++;
 		arg = strtok(NULL, " \t\n");
 		execute_opcode(opcode, arg, &stack, line_number);
 	}
