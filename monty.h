@@ -55,6 +55,8 @@ void mul(stack_t **stack, unsigned int line_number);
 
 /* 2-opcode_functions.c */
 void mod(stack_t **stack, unsigned int line_number);
+void pchar(stack_t **stack, unsigned int line_number);
+void pstr(stack_t **stack, unsigned int line_number);
 
 /* 0-functions.c */
 bool is_integer(char *arg);

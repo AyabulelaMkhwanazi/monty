@@ -25,6 +25,7 @@ unsigned int line_number)
 		{"nop", nop}, {"sub", sub},
 		{"div", div_op}, {"mul", mul},
 		{"mod", mod}, {"#", nop},
+		{"pchar", pchar}, {"pstr", pstr},
 		{NULL, NULL}
 	};
 	int n, i = 0;
