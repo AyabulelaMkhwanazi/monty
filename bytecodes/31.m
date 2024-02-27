@@ -1,12 +1,7 @@
-push 97
-push 108
-push 101
-push 108
-push 117
-push 98
-push 97
-push 121
-push 65
+push 1
+push 2
+push 3
+push 4
 pall
 rotr
 pall

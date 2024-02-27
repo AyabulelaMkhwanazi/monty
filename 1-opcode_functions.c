@@ -26,14 +26,31 @@ void add(stack_t **stack, unsigned int line_number)
 		handle_error(line_number, "can't add, stack too short", NULL);
 	}
 
-	/* ADD THE TOP TWO ELEMENTS OF THE STACK */
-	(*stack)->next->n += (*stack)->n;
+	if (mode == STACK)
+	{
+		/* ADD THE TOP TWO ELEMENTS OF THE STACK */
+		(*stack)->next->n += (*stack)->n;
 
-	/* REMOVE THE TOP ELEMENTS OF THE STACK */
-	tmp = (*stack);
-	*stack = (*stack)->next;
-	(*stack)->prev = NULL;
-	free(tmp);
+		/* REMOVE THE TOP ELEMENTS OF THE STACK */
+		tmp = (*stack);
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
+		free(tmp);
+	}
+	else
+	{
+		/* add the front and second element of the queue */
+		(*stack)->n += (*stack)->next->n;
+
+		/* remove the second element of the queue */
+		tmp = (*stack)->next;
+		(*stack)->next = tmp->next;
+		if (tmp->next != NULL)
+		{
+			tmp->next->prev = *stack;
+		}
+		free(tmp);
+	}
 }
 
 /**
@@ -81,14 +98,31 @@ void sub(stack_t **stack, unsigned int line_number)
 		handle_error(line_number, "can't sub, stack too short", NULL);
 	}
 
-	/* Subtract the top element of the stack from the second top element */
-	(*stack)->next->n -= (*stack)->n;
+	if (mode == STACK)
+	{
+		/* Subtract the top element of the stack from the second top element */
+		(*stack)->next->n -= (*stack)->n;
 
-	/* remove the top element of the stack */
-	tmp = (*stack);
-	*stack = (*stack)->next;
-	(*stack)->prev = NULL;
-	free(tmp);
+		/* remove the top element of the stack */
+		tmp = (*stack);
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
+		free(tmp);
+	}
+	else
+	{
+		/* subtract the second element of the queue from the front element */
+		(*stack)->n -= (*stack)->next->n;
+
+		/* remove the second element of the queue */
+		tmp = (*stack)->next;
+		(*stack)->next = tmp->next;
+		if (tmp->next != NULL)
+		{
+			tmp->next->prev = *stack;
+		}
+		free(tmp);
+	}
 }
 
 /**
@@ -125,14 +159,27 @@ void div_op(stack_t **stack, unsigned int line_number)
 		handle_error(line_number, "division by zero", NULL);
 	}
 
-	/* DIVIDE THE SECOND TOP ELEMENT OF THE STACK BY THE TOP ELEMENT */
-	(*stack)->next->n /= (*stack)->n;
+	if (mode == STACK)
+	{
+		/* DIVIDE THE SECOND TOP ELEMENT OF THE STACK BY THE TOP ELEMENT */
+		(*stack)->next->n /= (*stack)->n;
 
-	/* remove the top element of the stack */
-	tmp = (*stack);
-	*stack = (*stack)->next;
-	(*stack)->prev = NULL;
-	free(tmp);
+		/* remove the top element of the stack */
+		tmp = (*stack);
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
+		free(tmp);
+	}
+	else
+	{
+		/* divide the second top element of the stack by the top element */
+		(*stack)->next->n /= (*stack)->n;
+		/*remove the top element of the stack */
+		tmp = (*stack);
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
+		free(tmp);
+	}
 }
 
 /**
@@ -161,12 +208,29 @@ void mul(stack_t **stack, unsigned int line_number)
 		handle_error(line_number, "can't mul, stack too short", NULL);
 	}
 
-	/* multiply the second top element of the stack by the top element */
-	(*stack)->next->n *= (*stack)->n;
+	if (mode == STACK)
+	{
+		/* multiply the second top element of the stack by the top element */
+		(*stack)->next->n *= (*stack)->n;
 
-	/* remove the top element of the stack */
-	tmp = (*stack);
-	*stack = (*stack)->next;
-	(*stack)->prev = NULL;
-	free(tmp);
+		/* remove the top element of the stack */
+		tmp = (*stack);
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
+		free(tmp);
+	}
+	else
+	{
+		/* multiply the front and second element of the queue */
+		(*stack)->n *= (*stack)->next->n;
+
+		/* remove the second element of the queue */
+		tmp = (*stack)->next;
+		(*stack)->next = tmp->next;
+		if (tmp->next != NULL)
+		{
+			tmp->next->prev = *stack;
+		}
+		free(tmp);
+	}
 }

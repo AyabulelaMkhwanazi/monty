@@ -16,19 +16,39 @@
 */
 void push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new;
+	stack_t *new, *last = *stack;
 
 	/* allocate memory for a new node */
 	new = allocate_memory(sizeof(stack_t), line_number);
 
 	new->n = line_number;
 	new->prev = NULL;
-	new->next = *stack;
+	new->next = NULL;
+
 	if (*stack != NULL)
 	{
-		(*stack)->prev = new;
+		if (mode == STACK)
+		{
+			/* add the 'new' node at the top of the stack */
+			new->next = *stack;
+			(*stack)->prev = new;
+			*stack = new;
+		}
+		else
+		{
+			/* add the 'new' node at the end of the queue */
+			while (last->next != NULL)
+			{
+				last = last->next;
+			}
+			last->next = new;
+			new->prev = last;
+		}
 	}
-	*stack = new;
+	else
+	{
+		*stack = new;
+	}
 }
 
 /**
@@ -108,14 +128,31 @@ void pop(stack_t **stack, unsigned int line_number)
 		handle_error(line_number, "can't pop an empty stack", NULL);
 	}
 
-	/* remove the top element of the stack */
-	tmp = (*stack)->next;
-	free(*stack);
-	*stack = tmp;
-	if (*stack != NULL)
+	tmp = *stack;
+
+	if (mode == STACK || (*stack)->next == NULL)
 	{
-		(*stack)->prev = NULL;
+		/* remove the top element of the stack */
+		*stack = (*stack)->next;
+		if (*stack != NULL)
+		{
+			(*stack)->prev = NULL;
+		}
 	}
+	else
+	{
+		/* find the last node in the queue */
+		while (tmp->next != NULL)
+		{
+			tmp = tmp->next;
+		}
+		/* remove the last element of the queue */
+		if (tmp->prev != NULL)
+		{
+			tmp->prev->next = NULL;
+		}
+	}
+	free(tmp);
 }
 
 /**
@@ -143,8 +180,18 @@ void swap(stack_t **stack, unsigned int line_number)
 		handle_error(line_number, "can't swap, stack too short", NULL);
 	}
 
-	/* swaps the 2 elements of the stack */
-	tmp = (*stack)->n;
-	(*stack)->n = (*stack)->next->n;
-	(*stack)->next->n = tmp;
+	if (mode == STACK)
+	{
+		/* swaps the 2 elements of the stack */
+		tmp = (*stack)->n;
+		(*stack)->n = (*stack)->next->n;
+		(*stack)->next->n = tmp;
+	}
+	else
+	{
+		/* swaps the front and second elements of the queue */
+		tmp = (*stack)->n;
+		(*stack)->n = (*stack)->next->n;
+		(*stack)->next->n = tmp;
+	}
 }

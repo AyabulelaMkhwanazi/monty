@@ -120,7 +120,7 @@ void pstr(stack_t **stack, __attribute__((unused))unsigned int line_number)
 }
 
 /**
- * rot1 - Rotates the stack to the top.
+ * rotl - Rotates the stack to the top.
  *
  * @stack: pointer to pointer to the top of the stack.
  * @line_number: The line number where the opcode is located.

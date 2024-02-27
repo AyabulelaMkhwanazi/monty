@@ -1,6 +1,10 @@
 #ifndef MONTY_H
 #define MONTY_H
 
+/* Constants to represent the two modes */
+#define STACK 0
+#define QUEUE 1
+
 #define _GNU_SOURCE
 #include <ctype.h>
 #include <stdio.h>
@@ -8,6 +12,9 @@
 #include <string.h>
 #include <sys/types.h>
 #include <stdbool.h>
+
+/* extern declaration of the global variable */
+extern int mode;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -68,6 +75,10 @@ FILE *open_file(char *filename);
 /* execute_opcodes.c */
 void execute_opcode(char *opcode, char *arg, stack_t **stack,
 unsigned int line_number);
+
+/* stack_and_queue.c */
+void opcode_stack(stack_t **stack, __attribute__((unused))unsigned int line_number);
+void opcode_queue(stack_t **stack, __attribute__((unused))unsigned int line_number);
 
 /* memory.c */
 void *allocate_memory(size_t size, unsigned int line_number);

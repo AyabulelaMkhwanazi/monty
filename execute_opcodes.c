@@ -27,6 +27,7 @@ unsigned int line_number)
 		{"mod", mod}, {"#", nop},
 		{"pchar", pchar}, {"pstr", pstr},
 		{"rotl", rotl}, {"rotr", rotr},
+		{"stack", opcode_stack}, {"queue", opcode_queue},
 		{NULL, NULL}
 	};
 	int n, i = 0;
