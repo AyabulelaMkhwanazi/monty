@@ -53,6 +53,9 @@ void sub(stack_t **stack, unsigned int line_number);
 void div_op(stack_t **stack, unsigned int line_number);
 void mul(stack_t **stack, unsigned int line_number);
 
+/* 2-opcode_functions.c */
+void mod(stack_t **stack, unsigned int line_number);
+
 /* 0-functions.c */
 bool is_integer(char *arg);
 void handle_error(int line_number, char *message, char *opcode);

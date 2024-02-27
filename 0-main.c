@@ -11,7 +11,7 @@
 */
 int main(int argc, char **argv)
 {
-	char *line = NULL, *opcode, *arg;
+	char *line = NULL, *opcode, *arg, *start;
 	size_t len = 0;
 	ssize_t read;
 	unsigned int line_number = 0;
@@ -20,9 +20,7 @@ int main(int argc, char **argv)
 
 	/* check if the correct number of arguments was passed. */
 	if (argc != 2)
-	{
 		handle_error(0, "USAGE: monty file", NULL);
-	}
 
 	/* open the Monty bytcode file */
 	file = open_file(argv[1]);
@@ -30,12 +28,20 @@ int main(int argc, char **argv)
 	/* Parse the file and execute the opcodes */
 	while ((read = getline(&line, &len, file)) != -1)
 	{
+		/* skip leading spaces */
+		start = line;
+		while (*start == ' ')
+			start++;
+
+		/* if the first non-space character is '#', skip the line */
+		if (*start == '#')
+			continue;
+
 		line_number++;
 		opcode = strtok(line, " \t\n");
 		if (opcode == NULL)
-		{
 			continue;
-		}
+
 		arg = strtok(NULL, " \t\n");
 		execute_opcode(opcode, arg, &stack, line_number);
 	}

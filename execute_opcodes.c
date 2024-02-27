@@ -24,6 +24,7 @@ unsigned int line_number)
 		{"swap", swap}, {"add", add},
 		{"nop", nop}, {"sub", sub},
 		{"div", div_op}, {"mul", mul},
+		{"mod", mod}, {"#", nop},
 		{NULL, NULL}
 	};
 	int n, i = 0;
