@@ -118,3 +118,88 @@ void pstr(stack_t **stack, __attribute__((unused))unsigned int line_number)
 	printf("\n");  /* new line at the end per requirements */
 
 }
+
+/**
+ * rot1 - Rotates the stack to the top.
+ *
+ * @stack: pointer to pointer to the top of the stack.
+ * @line_number: The line number where the opcode is located.
+ *
+ * Description: This function is designed to implement the 'rot1' opcode
+ *			in a Monty bytecode file. The 'rot1' opcode rotates the stack
+ *			to the top. The top element of the stack becomes the last one,
+ *			and the second top element of the stack becomes the first one.
+ *			'rot1' never fails.
+ *
+ * Return: void.
+*/
+void rotl(stack_t **stack, __attribute__((unused))unsigned int line_number)
+{
+	/* start at the top of the stack (always) */
+	stack_t *tmp = *stack;
+	stack_t *old_top;
+
+	/* if the stack is empty or has one node, nothing to rotate */
+	if (*stack == NULL || (*stack)->next == NULL)
+	{
+		return;
+	}
+
+	/* store the old top of the stack node */
+	old_top = *stack;
+
+	/* move the top of the stack to the second node */
+	*stack = (*stack)->next;
+	/* the new top of the stack has no previous node */
+	(*stack)->prev = NULL;
+
+	/* find the last node */
+	while (tmp->next != NULL)
+	{
+		tmp = tmp->next;
+	}
+
+	/* make the old 'top-of-the-stack' node, the last one */
+	tmp->next = old_top;
+	/* since it's the last node now, its 'next' pointer should be NULL */
+	old_top->next = NULL;
+	/* its 'prev' pointer should be what was previously the last node */
+	old_top->prev = tmp;
+}
+
+/**
+ * rotr - Rotates the stack to the bottom.
+ *
+ * @stack: pointer to pointer to the top of the stack.
+ * @line_number: The line number where the opcode is located.
+ *
+ * Description: This function is designed to implement the 'rotr' opcode
+ *			in a Monty bytecode file. The 'rotr' opcode rotates the stack
+ *			to the bottom. The last element of the stack becomes the top
+ *			element of the stack.
+ *			'rotr' never fails.
+ *
+ * Return: void.
+*/
+void rotr(stack_t **stack, __attribute__((unused))unsigned int line_number)
+{
+	stack_t *tmp = *stack;  /* start at the top of the stack (always) */
+
+	/* if the stack is empty or has only one node, nothing to rotate */
+	if (*stack == NULL || (*stack)->next == NULL)
+	{
+		return;
+	}
+
+	/* find the last node in the stack */
+	while (tmp->next != NULL)
+	{
+		tmp = tmp->next;
+	}
+
+	/* make the last node, the new 'top-of-the-stack' node */
+	tmp->prev->next = NULL;
+	tmp->prev = NULL;
+	tmp->next = *stack;
+	*stack = tmp;
+}

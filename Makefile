@@ -4,17 +4,19 @@ TARGET=monty
 
 all:
 	@i=0; \
-	total=100; \
+	total=20; \
 	while [ $$i -le $$total ]; do \
 		perc=$$((200*$$i/$$total % 2 + 100*$$i/$$total)); \
-		printf "\rCompiling: $$perc%%"; \
-		sleep 0.01; \
+		printf "\rCompiling: %3d%%" $$perc; \
+		sleep 0.05; \
 		i=$$((i+1)); \
 	done; \
-	$(CC) $(CFLAGS) *.c -o $(TARGET) > /dev/null 2>&1; \
-	printf "\rCOMPILED\n"; \
-	sleep 2; \
-	printf "\033[1A\033[2K\033[1A";
+	printf "\r%$${COLUMNS}s\r"; \
+	if $(CC) $(CFLAGS) *.c -o $(TARGET); then \
+		printf "\nCOMPILED"; \
+		sleep 2; \
+		printf "\r%$${COLUMNS}s\r"; \
+	fi
 
 clean:
 	rm -f $(TARGET)

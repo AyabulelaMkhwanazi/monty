@@ -26,6 +26,7 @@ unsigned int line_number)
 		{"div", div_op}, {"mul", mul},
 		{"mod", mod}, {"#", nop},
 		{"pchar", pchar}, {"pstr", pstr},
+		{"rotl", rotl}, {"rotr", rotr},
 		{NULL, NULL}
 	};
 	int n, i = 0;
